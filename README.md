@@ -10,7 +10,7 @@ in theory, the orchestration here is not merely a trivial concatenation of certi
 
 when it comes to the second script, the “client driver,” is not a mere curl wrapper, i wanted it to be a consumer of `pkcs#12` keystores. the `.p12 container` encodes both the client’s private key and its leaf cert, with an optional passphrase (empty here). this artifact mimics what enterprise users might import into a browser truststore or a mutual tls microservice mesh sidecar. its consumption by curl demonstrates client-side cryptographic assertion, binding the transport session cryptographically to the ephemeral pki root.  
 
-# pseudo-sovereign pki enclaves and federated tunnel abstractions for on-demand service exposure
+# pki enclaves and federated tunnel abstractions 
 
 <img width="1983" height="1581" alt="IMG_3358" src="https://github.com/user-attachments/assets/144d5ebb-ab2c-4dbc-881a-fe89126ea9bc" />
 
