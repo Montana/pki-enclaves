@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pki-enclave-environments
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: dev
+            namespace: security-dev
+            valuesFile: values/dev.yaml
+          - name: stage
+            namespace: security-stage
+            valuesFile: values/stage.yaml
+          - name: prod
+            namespace: security
+            valuesFile: values/prod.yaml
+  template:
+    metadata:
+      name: pki-enclave-{{name}}
+    spec:
+      project: security
+      source:
+        repoURL: https://github.com/montana/helm-charts.git
+        targetRevision: main
+        chart: pki-enclave
+        helm:
+          valueFiles:
+            - values/argo.yaml
+            - '{{valuesFile}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
