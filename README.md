@@ -20,5 +20,9 @@ once you’ve got your enclave, you expose it not by opening raw ports yourself,
 
 when considered in the context of this safetunnels construct, docker ceases to be simply a packaging convenience and instead becomes a cryptographic trust amplifier. the image acts as an immutable locus of certificate authority bootstrapping, encapsulating both the smallstep cli and the openssl trust fabric inside a single content-addressed lineage. by doing so, docker guarantees that every instantiation of the container will deterministically re-manifest the same pseudo-sovereign pki enclave, with no dependency drift or host contamination.
 
+<img width="938" height="587" alt="Screenshot 2025-08-30 at 11 15 58 PM" src="https://github.com/user-attachments/assets/a77378f2-613f-426d-a299-7a3b49f26046" />
+
+what's noteworthy to me is the docker build stage materializes an immutable image lineage, a deterministic layering of filesystem diffs that together constitute a hermetic execution fossil. the act of docker run is therefore less a process spawn and more a projection of this fossilized lineage into an isolated namespace context, where pid trees, mount spaces, and network fabrics are carved into existence under cgroups control.
+
 # author
 michael mendy (c) 2025
