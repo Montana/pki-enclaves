@@ -1,6 +1,6 @@
 # pki enclaves
 
-this script spins up a local HTTPS server with mutual TLS (mTLS) using Smallstep to generate certificates, and then exposes it securely through ngrok, it creates both HTTP(S) and TCP tunnels, giving you public endpoints to your local service.
+these scripts spins up a local HTTPS server with mutual TLS (mTLS) using smallstep to generate certificates, and then exposes it securely through ngrok, it creates both HTTP(S) and TCP tunnels, giving you public endpoints to your local service. just be sure to `chmod +x` any script you run before running them. 
 
 ## use case 
 
@@ -19,6 +19,8 @@ once you’ve got your enclave, you expose it not by opening raw ports yourself,
 ## entropy drain 
 
 every loop iteration calls curl against the ngrok-exposed https endpoint, presenting the client’s `pkcs#12` bundle and verifying against the enclave’s self-issued root. each call forces a full tls handshake cycle: ephemeral key exchange, certificate validation, session key derivation. openssl’s tls machinery draws from the linux kernel’s random number generator (/`dev/urandom` or getrandom) to seed nonces and ephemeral keypairs. the while-true loop in `entropy-drain.sh` pushes this system into continuous demand, effectively bleeding the entropy pool. in cryptographic systems, entropy is a finite, slowly replenishing substrate, in turn causing entropy. 
+
+<img width="846" height="454" alt="Screenshot 2025-08-30 at 11 24 32 PM" src="https://github.com/user-attachments/assets/414341c4-f9b0-4771-8ca7-2f9bd3c3efe1" />
 
 ## docker and pki enclaves 
 
