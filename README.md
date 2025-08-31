@@ -9,3 +9,12 @@ in theory, the orchestration here is not merely a trivial concatenation of certi
 # client driver `pkcs#12`
 
 when it comes to the second script, the “client driver,” is not a mere curl wrapper, i wanted it to be a consumer of `pkcs#12` keystores. the .p12 container encodes both the client’s private key and its leaf cert, with an optional passphrase (empty here). this artifact mimics what enterprise users might import into a browser truststore or a mutual tls microservice mesh sidecar. its consumption by curl demonstrates client-side cryptographic assertion, binding the transport session cryptographically to the ephemeral pki root.  
+
+# pseudo-sovereign pki enclaves and federated tunnel abstractions for on-demand service exposure
+
+<img width="1983" height="1581" alt="IMG_3358" src="https://github.com/user-attachments/assets/144d5ebb-ab2c-4dbc-881a-fe89126ea9bc" />
+
+once you’ve got your enclave, you expose it not by opening raw ports yourself, but by letting ngrok handle ingress. here’s where the federation angle comes in: ngrok’s http tunnels operate at layer 7 (application-aware proxying), while its tcp tunnels operate at layer 4 (raw transport proxying). the federation is the coexistence of these different abstraction layers under a single umbrella, forwarding traffic into your local enclave. think of it as a federation of tunnel types, bound together into one fabric.
+
+# author
+michael mendy (c) 2025
