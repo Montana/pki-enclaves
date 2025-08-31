@@ -16,5 +16,9 @@ when it comes to the second script, the “client driver,” is not a mere curl 
 
 once you’ve got your enclave, you expose it not by opening raw ports yourself, but by letting ngrok handle ingress. here’s where the federation angle comes in: ngrok’s http tunnels operate at layer 7 (application-aware proxying), while its tcp tunnels operate at layer 4 (raw transport proxying). the federation is the coexistence of these different abstraction layers under a single umbrella, forwarding traffic into your local enclave. think of it as a federation of tunnel types, bound together into one fabric.
 
+## docker and pki enclaves 
+
+when considered in the context of this safetunnels construct, docker ceases to be simply a packaging convenience and instead becomes a cryptographic trust amplifier. the image acts as an immutable locus of certificate authority bootstrapping, encapsulating both the smallstep cli and the openssl trust fabric inside a single content-addressed lineage. by doing so, docker guarantees that every instantiation of the container will deterministically re-manifest the same pseudo-sovereign pki enclave, with no dependency drift or host contamination.
+
 # author
 michael mendy (c) 2025
